@@ -11,6 +11,7 @@ resource "aws_instance" "cloudtech_testserver_ec2" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.cloudtech_subnet_public1.id
   associate_public_ip_address = true
+  iam_instance_profile        = aws_iam_instance_profile.s3_instance_profile.name
   vpc_security_group_ids = [
     aws_security_group.cloudtech_stepserver_sg.id
   ]
@@ -28,5 +29,3 @@ resource "aws_iam_instance_profile" "s3_instance_profile" {
   name = aws_iam_role.s3_bucket_policy.name
   role = aws_iam_role.s3_bucket_policy.name
 }
-
-# Instance

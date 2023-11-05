@@ -1,6 +1,7 @@
 #------------------------------------
 # IAM Role
 #------------------------------------
+# S3の読み取り権限のAWS管理ポリシー
 data "aws_iam_policy" "s3_read_only" {
   name = "AmazonS3ReadOnlyAccess"
 }
@@ -21,7 +22,7 @@ resource "aws_iam_role" "s3_bucket_policy" {
     ]
   })
 }
-
+# IAMロールにReadOnlyAccessポリシーをアタッチ
 resource "aws_iam_role_policy_attachment" "allow_read_s3_bucket_policy" {
   role       = aws_iam_role.s3_bucket_policy.name
   policy_arn = data.aws_iam_policy.s3_read_only.arn
